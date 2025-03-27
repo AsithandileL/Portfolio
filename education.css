@@ -28,13 +28,14 @@ main{
     font-weight: bold;
 }
 .courses-tag{
-    width: 75%;
+    width: 95%;
 }
 
 .courses-tag button{
     background-color: white;
     border: 1px solid;
     margin-bottom: 2vh;
+    margin-left: 0.7vw;
     color: red;
     
 }
