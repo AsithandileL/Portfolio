@@ -1,0 +1,40 @@
+main{
+    align-items: start;
+}
+.title{
+    font-size: 2em;
+    font-weight: bold;
+    left: 45%;
+    position: relative;
+}
+
+.varsity{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left:10vw ;
+    
+}
+.varsity p, .varsity h4 {
+    margin: 2px 0;  /* Reduce vertical spacing */
+    line-height: 1;  /* Reduce line height for compactness */
+    
+}
+
+.courses{
+    margin-left:10vw;
+}
+.courses p{
+    font-weight: bold;
+}
+.courses-tag{
+    width: 75%;
+}
+
+.courses-tag button{
+    background-color: white;
+    border: 1px solid;
+    margin-bottom: 2vh;
+    color: red;
+    
+}

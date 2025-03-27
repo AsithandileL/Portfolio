@@ -134,7 +134,8 @@ a{
 .role{
     position: static; /* Remove fixed positioning */
     font-size: 1.2em;
-    color: brown;
+    color: black;
+    font-weight: lighter;
     font-family: 'Times New Roman', Times, serif;
 }
 /* Container for Name, Role, and Contact */
@@ -166,6 +167,7 @@ a{
     font-size: 1.5em;
     width: 80%;
     text-align: center;
+    font-weight: lighter;
 }
 
 @media screen and (max-width: 900px) {
