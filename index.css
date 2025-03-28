@@ -41,7 +41,7 @@ footer{
 }
 nav{
     width: 100%;
-    top: 1.5vh;
+    top: 1vh;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -181,10 +181,6 @@ a{
         height: auto;
         font-size: 0.9em;
     }
-    .image-container{
-        width:45%;
-        height: 20%;
-    }
     .contact{
         width: 30vw; 
     }
@@ -198,8 +194,10 @@ a{
     footer{
         width: 95%;
     }
-    .content-container {
-        margin-top: 40%;
+    .contact{
+        width: 30vw;
     }
-    
+    .name{
+        font-size: 5vw;
+    }
 }
