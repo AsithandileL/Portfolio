@@ -59,7 +59,7 @@ button{
     color: white;
     border-radius: 3px;
     border:2px solid black;
-    font-size: 1 em;
+    font-size: 1em;
     width: auto;
     height:2vw ;
     transition: 2s;
@@ -174,7 +174,7 @@ a{
     button{
         width: auto;
         height: auto;
-        font-size: 1 em;
+        font-size: 0.9em;
     }
     .image-container{
         width:45%;
