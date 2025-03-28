@@ -17,8 +17,10 @@ main{
 }
 .varsity p, .varsity h4 {
     margin: 2px 0;  /* Reduce vertical spacing */
-    line-height: 1;  /* Reduce line height for compactness */
-    
+    line-height: 1;  /* Reduce line height for compactness */ 
+}
+.varsity p{
+    font-size: 0.8em;
 }
 
 .courses{
