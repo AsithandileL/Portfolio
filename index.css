@@ -6,6 +6,11 @@ html, body{
     width: 100%;
     height: 100vh;
     font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevents whole page from scrolling */
+    background-image: url('https://www.itl.cat/pngfile/big/157-1572191_hd-wallpapers-for-website-background-cool-background-image.jpg');
+    background-size: cover; /* Ensures the image covers the full width */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the background image */
     
 }
 main{

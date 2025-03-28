@@ -1,0 +1,6 @@
+main{
+    overflow-y: auto; /* Enables vertical scrolling */}
+.scroll-test{
+    border: 1px solid;
+    height: 100vh;
+}

@@ -4,8 +4,8 @@ main{
 .title{
     font-size: 2em;
     font-weight: bold;
-    left: 45%;
-    position: relative;
+    margin-left: 30vw;
+    margin-top: 2vh;
 }
 
 .varsity{
