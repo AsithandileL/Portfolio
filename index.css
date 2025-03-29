@@ -67,7 +67,8 @@ button{
     border-radius: 3px;
     border:2px solid black;
     font-size: 1em;
-    width: auto;
+    
+    
     height:2vw ;
     transition: 2s;
 
@@ -179,9 +180,13 @@ a{
 
 @media screen and (max-width: 900px) {
     button{
-        width: auto;
+        padding: 0.5vh 1px;
         height: auto;
+        white-space: nowrap; 
         font-size: 0.9em;
+    }
+    .ul{
+        gap: 2vw;
     }
     .contact{
         width: 30vw; 
