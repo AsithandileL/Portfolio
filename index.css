@@ -180,13 +180,10 @@ a{
 
 @media screen and (max-width: 900px) {
     button{
-        padding: 0.5vh 1px;
+        padding: 0.6vh 2px;
         height: auto;
         white-space: nowrap; 
         font-size: 0.9em;
-    }
-    .ul{
-        gap: 2vw;
     }
     .contact{
         width: 30vw; 
