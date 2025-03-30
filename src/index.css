@@ -200,8 +200,8 @@ a{
     }
     main{
         width: 95%;
-        max-height: 72vh;
-        margin-bottom: 5vh; /* Adjust to avoid overlap */
+        max-height: 75vh;
+        margin-bottom: 8vh; /* Adjust to avoid overlap */
     }
     footer{
         width: 95%;
