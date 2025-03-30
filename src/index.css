@@ -200,7 +200,7 @@ a{
     }
     main{
         width: 95%;
-        min-height: 75vh; /* Allow it to be taller */
+        min-height: 70vh; /* Allow it to be taller */
         max-height: 80vh;
         margin-bottom: 3vh; /* Adjust to avoid overlap */
     }
