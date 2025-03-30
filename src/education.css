@@ -46,9 +46,9 @@ main{
     width: 100%;
 }
 .varsity li{
-    list-style: none;
+    list-style: disc;
     text-align: start;
-    font-size: 0.9rem;
-    padding-left: 1.9vw;
+    font-size: 0.85rem;
+    margin-left: 1.9vw;
     padding-bottom: 1vh;
 }
