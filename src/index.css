@@ -202,7 +202,7 @@ a{
         width: 95%;
         min-height: 75vh; /* Allow it to be taller */
         max-height: 80vh;
-        margin-bottom: 2.5vh; /* Adjust to avoid overlap */
+        margin-bottom: 3vh; /* Adjust to avoid overlap */
         margin-top: 2.5vh;
     }
     footer{
