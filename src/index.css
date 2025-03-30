@@ -203,7 +203,6 @@ a{
         min-height: 75vh; /* Allow it to be taller */
         max-height: 80vh;
         margin-bottom: 3vh; /* Adjust to avoid overlap */
-        margin-top: 2.5vh;
     }
     footer{
         width: 95%;
