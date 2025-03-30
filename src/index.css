@@ -200,7 +200,7 @@ a{
     }
     main{
         width: 95%;
-        max-height: 75vh;
+        max-height: 70vh;
         margin-bottom: 8vh; /* Adjust to avoid overlap */
     }
     footer{
