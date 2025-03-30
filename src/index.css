@@ -201,8 +201,9 @@ a{
     main{
         width: 95%;
         min-height: 75vh; /* Allow it to be taller */
-        max-height: 90vh;
-        margin-top: 1vh; /* Adjust to avoid overlap */
+        max-height: 80vh;
+        margin-bottom: 2.5vh; /* Adjust to avoid overlap */
+        margin-top: 2.5vh;
     }
     footer{
         width: 95%;
