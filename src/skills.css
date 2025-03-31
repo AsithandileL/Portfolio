@@ -1,9 +1,10 @@
 .grid-layout{
     display:grid;
+    /*background-color: #205781;*/
     grid-template-columns:repeat(4, 1fr);
     place-self: center;
-    border: 2px solid purple; /* Neon Cyan Border */
-    box-shadow: 0 0 5px rgb(17, 72, 103), 0 0 20px rgb(66, 0, 128), 0 0 5px purple; /* Glowing Effect */
+    border: 1px solid purple; /* Neon Cyan Border */
+    box-shadow: 0 0 5px rgb(69, 151, 198), 0 0 20px rgba(66, 0, 128, 0.032), 0 0 5px purple; /* Glowing Effect */
     border-radius: 10px;
 }
 figure{
@@ -18,6 +19,7 @@ figure i{
 
 figcaption{
     font-size: 0.6em;
+    color:black;
     text-align: center;
     font-weight: bold;
 }
