@@ -2,6 +2,9 @@
     display:grid;
     grid-template-columns:repeat(4, 1fr);
     place-self: center;
+    border: 2px solid purple; /* Neon Cyan Border */
+    box-shadow: 0 0 5px rgb(17, 72, 103), 0 0 20px rgb(66, 0, 128), 0 0 5px purple; /* Glowing Effect */
+    border-radius: 10px;
 }
 figure{
 
