@@ -111,28 +111,6 @@ button:hover{
     color: black;
     
 }
-@keyframes fallToCenter {
-    0% {
-        transform: translateY(0) rotate(0deg);
-    }
-    40% {
-        transform: translate(calc(50vw - 50%), 50vh) rotate(0deg); /* Move to center */
-    }
-    60% {
-        transform: translate(calc(50vw - 50%), calc(50vh - 50px)) rotate(0deg); /* Bounce up */
-    }
-    80% {
-        transform: translate(calc(50vw - 50%), 50vh) rotate(180deg); /* Settle down */
-    }
-    100% {
-        transform: translate(calc(50vw - 50%), 50vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-button.clicked {
-    animation: fallToCenter 1s ease-in-out forwards;
-}
 a{
     color: black;
     text-decoration: none;
@@ -160,7 +138,7 @@ a{
     font-size: 1.2em;
     color: black;
     font-weight: lighter;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Poppins', sans-serif;
 }
 /* Container for Name, Role, and Contact */
 .info-container {
