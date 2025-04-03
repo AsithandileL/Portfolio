@@ -48,10 +48,9 @@ video{
     .projects-container{
         display:flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
-        gap: 3vh;
-        border: 1px solid;
+        gap: 5vh;
         margin-top: 0;
     }
 }
