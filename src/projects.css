@@ -50,6 +50,8 @@ video{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 5vh;
+        gap: 3vh;
+        border: 1px solid;
+        margin-top: 0;
     }
 }
