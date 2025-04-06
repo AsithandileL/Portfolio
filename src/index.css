@@ -69,10 +69,10 @@ button{
     cursor: pointer;
     color: white;
     border-radius: 3px;
-    border:2px solid black;
+    border:1px solid black;
     font-size: 1em;
     height:2.2vw ;
-    transition: 2s;
+    transition: 0.5s;
 
     /* Animation */
     transform: translateY(-100vh);
