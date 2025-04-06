@@ -56,7 +56,7 @@ img{
 @media screen and (max-width:900px){
     .project{
         width:90%;
-        height: 60vh;
+        height: 55vh;
         text-align: center;
     }
     .projects-container{
