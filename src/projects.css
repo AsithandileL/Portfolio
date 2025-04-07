@@ -10,7 +10,7 @@
 .project{
     border: 1px solid;
     border-radius: 10px;
-    height: 60vh;
+    height: 58vh;
     width: 45%;
     max-width: 100%;
     transition: 100ms;
@@ -21,7 +21,7 @@
 }
 .project p{
     text-align: left;
-    padding: 2.5vh 1vh;
+    padding: 1vh 1vh;
     font-size: 0.87em;
     font-family: sans-serif;
 }
@@ -67,6 +67,6 @@ img{
         margin-top: 0;
     }
     .tags{
-        margin-top: 0.5vh; 
+        margin-top: 0.3vh; 
     }
 }
