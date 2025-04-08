@@ -15,9 +15,6 @@
     transition: 0.5s;
     background-color: #465888;
 }
-.certificate:hover{
-    opacity: 0.8;
-}
 .certificate img{
     width: 80%;
     height: 70%;
@@ -29,11 +26,11 @@
     padding: 1vh 3vh;
     border-radius: 5px;
     color: black;
+    transition: 0.5s;
 }
-.description{
+.certificate a:hover{
+    background-color: black;
     color: white;
-    text-align: left;
-    padding: 10px;
 }
 @media screen and (max-width:900px){
     .cert-container{
