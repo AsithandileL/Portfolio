@@ -128,6 +128,8 @@ a{
 }
 .resume a {
     color: white; /* Only affect links inside .resume */
+    padding:1vh 2vh;
+    text-align: center;
 }
 .name{
     font-size: 1.8em;
