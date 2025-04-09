@@ -45,7 +45,7 @@ footer{
 
 }
 nav{
-    width: 100%;
+    width: 70%;
     height: 8vh; /* Explicitly set height */
     top: 1vh;
     position: absolute;
@@ -117,19 +117,19 @@ a{
 }
 .resume{
     color: white;
-    padding: 5px;
-    background-color: rgb(48, 90, 198);
+    background-color: white;
     text-decoration: none;
-    
-    height: 4%;
     border-radius: 5px;
     text-align: center;
     align-items: center;
+    transition: 0.5s;
 }
 .resume a {
-    color: white; /* Only affect links inside .resume */
+    color: black; /* Only affect links inside .resume */
     padding:1vh 2vh;
     text-align: center;
+    border: 1px solid;
+    border-radius: 5px;
 }
 .name{
     font-size: 1.8em;
@@ -155,7 +155,7 @@ a{
 .contact{
     border: 1px solid;
     width: 60%;
-    height: 5vh;
+    padding: 1.1vh;
     border-radius: 10px;
     text-align: center;
     display: flex;
@@ -205,6 +205,11 @@ a{
     }
     .resume{
         width:auto;
-        padding: 3px;
+    }
+    .resume a{
+        padding: 0.8vh;
+    }
+    nav{
+        width: 92%;
     }
 }
