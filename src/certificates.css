@@ -21,9 +21,10 @@
     padding: 2vh 0;
     margin-bottom: 2vh;
     transition: 0.3s ease;
+    filter: saturate(0);
 }
 .certificate img:hover{
-    transform: scale(1.02);
+    filter: saturate(1);
 }
 .certificate a{
     background-color: white;
@@ -44,6 +45,9 @@
     .certificate{
         width: 80%;
         height: 55%;
+    }
+    .certificate img{
+        filter: saturate(1);
     }
     
 }
