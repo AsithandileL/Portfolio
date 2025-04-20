@@ -180,7 +180,7 @@ a{
 
 @media screen and (max-width: 900px) {
     button{
-        padding: 0.7vh 1.2vw;
+        padding: 0.7vh 1.1vw;
         height: auto;
         white-space: nowrap; 
         font-size: 0.9em;
