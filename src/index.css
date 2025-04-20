@@ -50,7 +50,8 @@ nav{
     top: 1vh;
     position: absolute;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
 }
 ul{
     list-style: none;
@@ -180,7 +181,7 @@ a{
 
 @media screen and (max-width: 900px) {
     button{
-        padding: 0.7vh 2px;
+        padding: 0.8vh 3px;
         height: auto;
         white-space: nowrap; 
         font-size: 0.9em;
