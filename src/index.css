@@ -213,5 +213,6 @@ a{
     }
     nav{
         width: 92%;
+        justify-content: space-between;
     }
 }
