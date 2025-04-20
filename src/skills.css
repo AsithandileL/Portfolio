@@ -8,10 +8,13 @@
     border-radius: 10px;
 }
 figure{
-    transition: 0.3s;
+    transition: 0.3s ease;
+    filter: saturate(0);
 }
 figure:hover{
     transform: scale(1.1);
+    filter: saturate(1);
+    
 }
 figure i{
     font-size: 2.8em;
@@ -29,5 +32,8 @@ figcaption{
 @media screen and (max-width: 900px){
     .grid-layout{
         grid-template-columns:repeat(2, 1fr);
+    }
+    figure{
+        filter: saturate(1);
     }
 }
