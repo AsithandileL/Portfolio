@@ -202,6 +202,7 @@ a{
     }
     .name{
         font-size: 6vw;
+        font-family: 'Poppins', sans-serif;
     }
     .resume{
         width:auto;
