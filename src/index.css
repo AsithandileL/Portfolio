@@ -28,9 +28,7 @@ main{
     gap: 5%; /* Adds space between items */
     box-shadow: 10px 10px 5px black;
     overflow-y: auto; /* Enable vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    border: 1px solid;
-    
+    overflow-x: hidden; /* Prevent horizontal scrolling */    
 }
 
 footer{
@@ -197,7 +195,7 @@ a{
     main{
         width: 95%;
         max-height: 75%;
-        margin-bottom: 8vh; /* Adjust to avoid overlap */
+        margin-bottom: 10vh; /* Adjust to avoid overlap */
     }
     footer{
         width: 95%;
