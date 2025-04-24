@@ -29,6 +29,7 @@ main{
     box-shadow: 10px 10px 5px black;
     overflow-y: auto; /* Enable vertical scrolling */
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    border: 1px solid;
     
 }
 
@@ -195,7 +196,7 @@ a{
     }
     main{
         width: 95%;
-        max-height: 71vh;
+        max-height: 75%;
         margin-bottom: 8vh; /* Adjust to avoid overlap */
     }
     footer{
