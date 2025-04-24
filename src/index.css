@@ -194,7 +194,7 @@ a{
     }
     main{
         width: 95%;
-        max-height: 75%;
+        max-height: 73%;
         margin-bottom: 10vh; /* Adjust to avoid overlap */
     }
     footer{
