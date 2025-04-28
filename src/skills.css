@@ -1,13 +1,11 @@
 .grid-layout{
     display:grid;
-    width: 50%;
     /*background-color: #205781;*/
     grid-template-columns:repeat(4, 1fr);
     place-self: center;
     border: 1px solid purple; /* Neon Cyan Border */
     box-shadow: 0 0 5px rgb(69, 151, 198), 0 0 20px rgba(66, 0, 128, 0.032), 0 0 5px purple; /* Glowing Effect */
     border-radius: 10px;
-    height: 13vh;
 }
 figure{
     transition: 0.3s ease;
