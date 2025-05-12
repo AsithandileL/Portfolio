@@ -9,7 +9,7 @@
 }
 figure{
     transition: 0.3s ease;
-    filter: saturate(0);
+    /*filter: saturate(0);*/
 }
 figure:hover{
     transform: scale(1.1);
