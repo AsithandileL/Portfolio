@@ -134,6 +134,14 @@ a{
 .name{
     font-size: 1.8em;
     font-weight: bold;
+    font-family: 'Roboto', sans-serif; /* Choose a font */
+    background: linear-gradient(to right, #385067, #df0b0b); /* Gradient from light blue to white */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* For older browsers */
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 .role{
     position: static; /* Remove fixed positioning */
