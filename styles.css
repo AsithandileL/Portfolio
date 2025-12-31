@@ -502,6 +502,12 @@
                 width: 8vw;
             }
         }
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
 
         /* Mobile Menu */
         .mobile-menu {
