@@ -1,0 +1,93 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Base data
+products = {
+    "Stanbic (5 000)": {"qty":5000, "arrival":7, "sla":12},
+    "Nedbank (10 000)": {"qty":10000, "arrival":7, "sla":13},
+    "FNB Issuance (17 000)": {"qty":17000, "arrival":7, "sla":16},
+    "FNB Subs (5 000)": {"qty":5000, "arrival":7, "sla":13},
+    "FNB Botswana (700)": {"qty":700, "arrival":16, "sla":20},
+}
+
+hours = list(range(7,21))
+capacity = 10000
+
+remaining = {p: products[p]["qty"] for p in products}
+schedule = {h: {p: 0 for p in products} for h in hours}
+
+for h in hours:
+    available = {p: remaining[p] for p in products if products[p]["arrival"] <= h and remaining[p] > 0}
+    cap = capacity
+    for p, _ in sorted(available.items(), key=lambda x: products[x[0]]["sla"]):
+        if cap <= 0:
+            break
+        take = min(remaining[p], cap)
+        schedule[h][p] = take
+        remaining[p] -= take
+        cap -= take
+
+# Check SLA compliance
+sla_status = {}
+for p in products:
+    completed_by_sla = sum(schedule[h][p] for h in hours if h <= products[p]["sla"])
+    sla_status[p] = {
+        "completed": completed_by_sla,
+        "required": products[p]["qty"],
+        "met": completed_by_sla >= products[p]["qty"]
+    }
+
+# Create the DataFrame
+df = pd.DataFrame(schedule).T
+
+# Create the plot
+fig, ax = plt.subplots(figsize=(12, 6))
+df.plot(kind="bar", stacked=True, ax=ax, width=0.65)
+
+# Format labels
+labels = [f"{h % 12 or 12} {'AM' if h < 12 else 'PM'}" for h in df.index]
+ax.set_xticks(range(len(df.index)))
+ax.set_xticklabels(labels, rotation=45)
+
+# Capacity line
+ax.axhline(capacity, color='blue', linestyle="--", linewidth=2, label="Max Capacity", zorder=5)
+
+# Add SLA deadline vertical lines
+sla_times = sorted(set(products[p]["sla"] for p in products))
+for sla_time in sla_times:
+    if sla_time in df.index:
+        sla_idx = list(df.index).index(sla_time)
+        ax.axvline(sla_idx, linestyle=':', linewidth=1.5, color='red', alpha=0.6, zorder=4)
+
+ax.set_xlabel("Time", fontsize=12, fontweight='bold')
+ax.set_ylabel("Letters Sorted per Hour", fontsize=12, fontweight='bold')
+ax.set_title("30-bin Sorter (10,000/hr) - Distribution by Product (SLA Prioritized)", 
+             fontsize=14, fontweight='bold', pad=20)
+
+# Move legend outside plot
+ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=10)
+
+# Add grid
+ax.grid(axis='y', alpha=0.3, zorder=0)
+
+# Add SLA compliance summary in text box
+sla_text = "SLA Status:\n"
+for p, status in sla_status.items():
+    symbol = "✓" if status["met"] else "✗"
+    sla_text += f"{symbol} {p.split('(')[0].strip()}: {status['completed']:,}/{status['required']:,}\n"
+
+# Place text box
+ax.text(1.05, 0.5, sla_text, transform=ax.transAxes, fontsize=9,
+        verticalalignment='center', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+
+plt.tight_layout()
+#plt.savefig('/home/claude/30bin_sorter.png', dpi=300, bbox_inches='tight')
+
+# print("30-bin Sorter graph saved to /home/claude/30bin_sorter.png")
+# print("\n" + "="*70)
+# print("SLA COMPLIANCE SUMMARY - 30-bin Sorter (10,000/hr)")
+# print("="*70)
+for p, status in sla_status.items():
+    symbol = "✓" if status["met"] else "✗"
+    print(f"  {symbol} {p}: {status['completed']:,}/{status['required']:,}")
+# print("="*70)
