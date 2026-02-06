@@ -8,10 +8,14 @@ products = {
     "FNB Issuance (17 000)": {"qty":17000, "arrival":7, "sla":16},
     "FNB Subs (5 000)": {"qty":5000, "arrival":7, "sla":13},
     "FNB Botswana (700)": {"qty":700, "arrival":16, "sla":20},
+    "Investec (3 500)": {"qty":3500, "arrival":4.5, "sla":6},
+    "Diners (100)": {"qty":100, "arrival":4.5, "sla":6},
+    "Discovery Night (2 500)": {"qty":2500, "arrival":4.5, "sla":6},
+    "Nedbank EMV (15 000)": {"qty":15000, "arrival":12, "sla":15},
 }
 
-hours = list(range(7,21))
-capacity = 10000
+hours = list(range(4,21))
+capacity = 15000
 
 remaining = {p: products[p]["qty"] for p in products}
 schedule = {h: {p: 0 for p in products} for h in hours}
@@ -77,7 +81,7 @@ for p, status in sla_status.items():
     sla_text += f"{symbol} {p.split('(')[0].strip()}: {status['completed']:,}/{status['required']:,}\n"
 
 # Place text box
-ax.text(1.05, 0.5, sla_text, transform=ax.transAxes, fontsize=9,
+ax.text(1.05, 0, sla_text, transform=ax.transAxes, fontsize=9,
         verticalalignment='center', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
 plt.tight_layout()
@@ -89,5 +93,5 @@ plt.tight_layout()
 # print("="*70)
 for p, status in sla_status.items():
     symbol = "✓" if status["met"] else "✗"
-    print(f"  {symbol} {p}: {status['completed']:,}/{status['required']:,}")
+    #print(f"  {symbol} {p}: {status['completed']:,}/{status['required']:,}")
 # print("="*70)
