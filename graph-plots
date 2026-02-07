@@ -3,27 +3,62 @@ import matplotlib.pyplot as plt
 
 # Base data
 products = {
-    "Stanbic (5 000)": {"qty":5000, "arrival":7, "sla":12},
-    "Nedbank (10 000)": {"qty":10000, "arrival":7, "sla":13},
-    "FNB Issuance (17 000)": {"qty":17000, "arrival":7, "sla":16},
-    "FNB Subs (5 000)": {"qty":5000, "arrival":7, "sla":13},
-    "FNB Botswana (700)": {"qty":700, "arrival":16, "sla":20},
-    "Investec (3 500)": {"qty":3500, "arrival":4.5, "sla":6},
-    "Diners (100)": {"qty":100, "arrival":4.5, "sla":6},
-    "Discovery Night (2 500)": {"qty":2500, "arrival":4.5, "sla":6},
-    "Nedbank EMV (15 000)": {"qty":15000, "arrival":12, "sla":15},
+    "Stanbic (6300)": {"qty":6300, "arrival":12, "sla":15, "next_day": False},
+    "Nedbank (10000)": {"qty":10000, "arrival":7, "sla":13, "next_day": False},
+    "FNB Issuance (24000)": {"qty":24000, "arrival":21, "sla":16, "next_day": True},  # Next day SLA at 4pm
+    "FNB Subs (2285)": {"qty":2285, "arrival":10, "sla":12, "next_day": False},
+    "FNB Botswana (3000)": {"qty":3000, "arrival":13, "sla":20, "next_day": False},
+    "FNB Metal Debit (59)": {"qty":59, "arrival":7, "sla":10, "next_day": False},
+    "FNB Metal Credit (250)": {"qty":250, "arrival":7, "sla":10, "next_day": False},
+    "FNB Credit (1404)": {"qty":1404, "arrival":7, "sla":9, "next_day": False},
+    "FNB Debit Personalized (Batch 1) (3317)": {"qty":3317, "arrival":7, "sla":10, "next_day": False},
+    "FNB Debit Personalized (Batch 2) (1523)": {"qty":1523, "arrival":10, "sla":12, "next_day": False},
+    "FNB Debit Personalized (Batch 3) (3627)": {"qty":3627, "arrival":12, "sla":15, "next_day": False},
+    "Standard Bank (2000)": {"qty":2000, "arrival":7, "sla":10, "next_day": False},
+    "Standard Bank Fleet(1500)": {"qty":1500, "arrival":7, "sla":10, "next_day": False},
+    "NBS (700)": {"qty":700, "arrival":21, "sla":16, "next_day": True},  # Next day SLA at 4pm
+    "Absa Aro (3500)": {"qty":3500, "arrival":12, "sla":15, "next_day": False},
+    "Absa Fleet (1000)": {"qty":1000, "arrival":12, "sla":15, "next_day": False},
+    "Absa SA (3500)": {"qty":3500, "arrival":12, "sla":15, "next_day": False},
+    "Cpitec (1500)": {"qty":1500, "arrival":10, "sla":12, "next_day": False},
+    "Investec (3500)": {"qty":3500, "arrival":4.5, "sla":7, "next_day": False},
+    "DINERS(100)": {"qty":100, "arrival":4.5, "sla":7, "next_day": False},
+    "Discovery Night (2500)": {"qty":2500, "arrival":4.5, "sla":7, "next_day": False},
+    "Discovery Morning (100)": {"qty":100, "arrival":12, "sla":15, "next_day": False},
+    "Sasfin (5000)": {"qty":5000, "arrival":21, "sla":16, "next_day": True},  # Next day SLA at 4pm
+    "Orange Botswana (5000)": {"qty":5000, "arrival":21, "sla":16, "next_day": True},  # Next day SLA at 4pm
 }
 
-hours = list(range(4,21))
-capacity = 15000
+# Hours for the day (3AM-11PM) and next day morning (12AM-4PM)
+current_day_hours = list(range(3, 24))  # 3AM to 11PM
+next_day_hours = list(range(24, 25))  # 24=12AM, 25=1AM, 26=2AM, 27=3AM, 28=4PM (next day)
+hours = current_day_hours + next_day_hours
+
+capacity = 2800
 
 remaining = {p: products[p]["qty"] for p in products}
 schedule = {h: {p: 0 for p in products} for h in hours}
 
+# Scheduling logic
 for h in hours:
-    available = {p: remaining[p] for p in products if products[p]["arrival"] <= h and remaining[p] > 0}
+    # Products are available if they've arrived (considering day boundary)
+    if h >= 24:
+        # Next day - all products that arrived previous day are available
+        available = {p: remaining[p] for p in products if products[p]["arrival"] <= 23 and remaining[p] > 0}
+    else:
+        # Current day - normal availability check
+        available = {p: remaining[p] for p in products if products[p]["arrival"] <= h and remaining[p] > 0}
+    
     cap = capacity
-    for p, _ in sorted(available.items(), key=lambda x: products[x[0]]["sla"]):
+    
+    # Sort by: 1) same-day first (next_day=False), 2) earliest SLA
+    # This ensures same-day products are prioritized during their critical hours
+    sorted_products = sorted(
+        available.items(), 
+        key=lambda x: (products[x[0]]["next_day"], products[x[0]]["sla"])
+    )
+    
+    for p, _ in sorted_products:
         if cap <= 0:
             break
         take = min(remaining[p], cap)
@@ -34,7 +69,14 @@ for h in hours:
 # Check SLA compliance
 sla_status = {}
 for p in products:
-    completed_by_sla = sum(schedule[h][p] for h in hours if h <= products[p]["sla"])
+    if products[p]["next_day"]:
+        # For next-day products, SLA is 4PM next day (hour 28 in our extended schedule)
+        # Count everything completed up to hour 28 (4PM next day)
+        completed_by_sla = sum(schedule[h][p] for h in hours if h <= 28)
+    else:
+        # For same-day products, check completion by their SLA hour
+        completed_by_sla = sum(schedule[h][p] for h in hours if h <= products[p]["sla"])
+    
     sla_status[p] = {
         "completed": completed_by_sla,
         "required": products[p]["qty"],
@@ -44,54 +86,81 @@ for p in products:
 # Create the DataFrame
 df = pd.DataFrame(schedule).T
 
-# Create the plot
-fig, ax = plt.subplots(figsize=(12, 6))
+# Create the plot with more space for legend
+fig, ax = plt.subplots(figsize=(16, 8))
 df.plot(kind="bar", stacked=True, ax=ax, width=0.65)
 
 # Format labels
-labels = [f"{h % 12 or 12} {'AM' if h < 12 else 'PM'}" for h in df.index]
+labels = []
+for h in df.index:
+    if h < 24:
+        labels.append(f"{h % 12 or 12} {'AM' if h < 12 else 'PM'}")
+    else:
+        # Next day hours
+        next_h = h - 24
+        labels.append(f"{next_h % 12 or 12} {'AM' if next_h < 12 else 'PM'}\nNext Day")
+
 ax.set_xticks(range(len(df.index)))
-ax.set_xticklabels(labels, rotation=45)
+ax.set_xticklabels(labels, rotation=45, ha='right', fontsize=9)
 
 # Capacity line
 ax.axhline(capacity, color='blue', linestyle="--", linewidth=2, label="Max Capacity", zorder=5)
 
 # Add SLA deadline vertical lines
-sla_times = sorted(set(products[p]["sla"] for p in products))
-for sla_time in sla_times:
-    if sla_time in df.index:
-        sla_idx = list(df.index).index(sla_time)
-        ax.axvline(sla_idx, linestyle=':', linewidth=1.5, color='red', alpha=0.6, zorder=4)
+# sla_times = sorted(set(products[p]["sla"] for p in products if not products[p]["next_day"]))
+# for sla_time in sla_times:
+#     if sla_time in df.index:
+#         sla_idx = list(df.index).index(sla_time)
+#         ax.axvline(sla_idx, linestyle=':', linewidth=1.5, color='red', alpha=0.6, zorder=4)
+
+# Add vertical line to separate current day from next day
+if 24 in df.index:
+    separator_idx = list(df.index).index(24) - 0.5
+    ax.axvline(separator_idx, linestyle='--', linewidth=2, color='purple', alpha=0.7, 
+               label='Day Boundary', zorder=4)
+
+# Add volume labels inside bars
+for hour_idx, hour in enumerate(df.index):
+    cumulative = 0
+    for product in df.columns:
+        value = df.loc[hour, product]
+        if value > 0:  # Only show label if there's a value
+            # Position in middle of this product's segment
+            y_position = cumulative + value / 2
+            # Only show if segment is big enough (> 200 to avoid clutter)
+            if value > 200:
+                ax.text(hour_idx, y_position, f'{int(value):,}', 
+                       ha='center', va='center', fontsize=7, 
+                       fontweight='bold', color='white')
+            cumulative += value
 
 ax.set_xlabel("Time", fontsize=12, fontweight='bold')
 ax.set_ylabel("Letters Sorted per Hour", fontsize=12, fontweight='bold')
-ax.set_title("30-bin Sorter (10,000/hr) - Distribution by Product (SLA Prioritized)", 
+ax.set_title(f"Manual Sorting ({capacity}/hr) - Distribution by Product (SLA Prioritized)", 
              fontsize=14, fontweight='bold', pad=20)
 
-# Move legend outside plot
-ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=10)
+# Move legend outside plot to the right
+ax.legend(bbox_to_anchor=(1.02, 1), loc='upper left', fontsize=9, frameon=True)
 
 # Add grid
 ax.grid(axis='y', alpha=0.3, zorder=0)
 
-# Add SLA compliance summary in text box
+# Add SLA compliance summary in text box - positioned on the left side outside the plot
+fig.subplots_adjust(left=0.30)  # push plot right BEFORE adding SLA box
+
+# SLA text to far left, outside plotting area
 sla_text = "SLA Status:\n"
 for p, status in sla_status.items():
     symbol = "✓" if status["met"] else "✗"
     sla_text += f"{symbol} {p.split('(')[0].strip()}: {status['completed']:,}/{status['required']:,}\n"
 
-# Place text box
-ax.text(1.05, 0, sla_text, transform=ax.transAxes, fontsize=9,
-        verticalalignment='center', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+fig.text(
+    0.09, 0.5, sla_text,
+    fontsize=8,
+    va='center',
+    ha='left',
+    bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5),
+    transform=fig.transFigure
+)
 
-plt.tight_layout()
-#plt.savefig('/home/claude/30bin_sorter.png', dpi=300, bbox_inches='tight')
-
-# print("30-bin Sorter graph saved to /home/claude/30bin_sorter.png")
-# print("\n" + "="*70)
-# print("SLA COMPLIANCE SUMMARY - 30-bin Sorter (10,000/hr)")
-# print("="*70)
-for p, status in sla_status.items():
-    symbol = "✓" if status["met"] else "✗"
-    #print(f"  {symbol} {p}: {status['completed']:,}/{status['required']:,}")
-# print("="*70)
+#plt.tight_layout()
